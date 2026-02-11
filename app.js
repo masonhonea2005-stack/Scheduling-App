@@ -313,12 +313,23 @@ function daySummaryText(date) {
 }
 
 function copyDaySummary() {
-  navigator.clipboard.writeText(daySummaryText(selectedDate())).then(() => {
-    els.copySummary.textContent = 'Copied!';
-    setTimeout(() => {
-      els.copySummary.textContent = 'Copy day summary';
-    }, 1200);
-  });
+  const text = daySummaryText(selectedDate());
+
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    alert('Clipboard is unavailable in this browser context. Please copy manually from exported text.');
+    return;
+  }
+
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      els.copySummary.textContent = 'Copied!';
+      setTimeout(() => {
+        els.copySummary.textContent = 'Copy day summary';
+      }, 1200);
+    })
+    .catch(() => {
+      alert('Copy failed. Please try again or paste from exported notes.');
+    });
 }
 
 function exportData() {

@@ -47,6 +47,18 @@ This version is designed to be universal: **any major, any career field, any tar
    - write notes,
    - copy summary into OneNote.
 
+
+## Pythonista single-class version
+
+If you want a copy/paste-friendly Python implementation, use `universal_planner.py`.
+It contains one class (`UniversalPlanner`) with:
+- workload calculations,
+- universal recommendations,
+- daily tasks/notes,
+- JSON import/export.
+
+You can copy that single class into Pythonista and use it directly.
+
 ## Use with Microsoft OneNote
 
 - Click **Copy day summary** in the Daily Planner.
