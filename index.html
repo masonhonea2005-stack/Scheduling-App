@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College + Internship Balance Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <h1>College + Internship Balance Planner</h1>
+      <p>Create a daily, realistic study + work plan you can actually stick with.</p>
+    </header>
+
+    <main class="layout">
+      <section class="card">
+        <h2>Profile</h2>
+        <form id="profile-form" class="stack">
+          <label>
+            Name
+            <input id="profile-name" type="text" placeholder="Your name" />
+          </label>
+          <label>
+            Timezone
+            <input id="profile-timezone" type="text" placeholder="e.g., America/New_York" />
+          </label>
+          <label>
+            Target GPA
+            <input id="profile-gpa" type="number" min="0" max="4" step="0.1" value="3.5" />
+          </label>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Weekly commitments</h2>
+        <form id="baseline-form" class="stack">
+          <label>
+            Internship hours (default 45)
+            <input id="internship-hours" type="number" min="0" max="80" value="45" required />
+          </label>
+          <label>
+            Sleep hours per night (default 8)
+            <input id="sleep-hours" type="number" min="4" max="12" value="8" step="0.5" required />
+          </label>
+          <label>
+            Personal / commute hours per week
+            <input id="personal-hours" type="number" min="0" max="80" value="18" step="0.5" required />
+          </label>
+        </form>
+      </section>
+
+      <section class="card full">
+        <h2>Add class</h2>
+        <form id="class-form" class="stack">
+          <div class="grid-2">
+            <label>
+              Class name
+              <input id="class-name" type="text" placeholder="e.g., Algorithms" required />
+            </label>
+            <label>
+              Credits
+              <input id="class-credits" type="number" min="1" max="6" value="3" required />
+            </label>
+          </div>
+          <div class="grid-3">
+            <label>
+              Class meeting hours / week
+              <input id="class-meeting-hours" type="number" min="0" max="20" value="3" step="0.5" required />
+            </label>
+            <label>
+              Difficulty (1-5)
+              <input id="class-difficulty" type="number" min="1" max="5" value="3" required />
+            </label>
+            <label>
+              Next due day
+              <select id="class-due-day">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+            </label>
+          </div>
+          <button type="submit">Add class</button>
+        </form>
+      </section>
+
+      <section class="card full">
+        <div class="section-header">
+          <h2>Your classes</h2>
+          <button id="clear-classes" class="secondary" type="button">Clear all</button>
+        </div>
+        <ul id="class-list" class="list"></ul>
+      </section>
+
+      <section class="card full">
+        <h2>Recommended weekly plan</h2>
+        <div id="summary" class="summary"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Study hrs/week</th>
+              <th>Next due day</th>
+            </tr>
+          </thead>
+          <tbody id="allocation-body"></tbody>
+        </table>
+        <h3>Weekly focus by day</h3>
+        <ul id="day-plan" class="list"></ul>
+      </section>
+
+      <section class="card full">
+        <h2>Career path next steps</h2>
+        <form id="career-form" class="stack">
+          <div class="grid-2">
+            <label>
+              Career path goal
+              <select id="career-path">
+                <option value="software-engineering">Software Engineering</option>
+                <option value="data-science">Data Science / AI</option>
+                <option value="cybersecurity">Cybersecurity</option>
+                <option value="product-management">Product Management</option>
+              </select>
+            </label>
+            <label>
+              Your current stage
+              <select id="career-stage">
+                <option value="freshman">Freshman</option>
+                <option value="sophomore">Sophomore</option>
+                <option value="junior">Junior</option>
+                <option value="senior">Senior</option>
+              </select>
+            </label>
+          </div>
+        </form>
+
+        <div class="recommendations-grid">
+          <div>
+            <h3>Recommended next classes</h3>
+            <ul id="class-recommendations" class="list"></ul>
+            <form id="custom-class-rec-form" class="inline-form">
+              <input id="custom-class-rec-input" type="text" placeholder="Add your own class recommendation" />
+              <button type="submit">Add</button>
+            </form>
+          </div>
+          <div>
+            <h3>Recommended internships to target</h3>
+            <ul id="internship-recommendations" class="list"></ul>
+            <form id="custom-internship-rec-form" class="inline-form">
+              <input id="custom-internship-rec-input" type="text" placeholder="Add your own internship target" />
+              <button type="submit">Add</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="card full">
+        <h2>Daily planner (OneNote-friendly)</h2>
+        <div class="grid-2">
+          <label>
+            Date
+            <input id="daily-date" type="date" />
+          </label>
+          <div class="stack">
+            <span class="label-like">Quick actions</span>
+            <div class="button-row">
+              <button id="copy-day-summary" type="button">Copy day summary</button>
+              <button id="export-data" class="secondary" type="button">Export data</button>
+              <label class="file-label">
+                Import data
+                <input id="import-data" type="file" accept="application/json" />
+              </label>
+              <button id="reset-all" class="danger" type="button">Reset all data</button>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="daily-title">Today's checklist</h3>
+        <form id="daily-task-form" class="inline-form">
+          <input id="daily-task-input" type="text" placeholder="Add a task for this date" />
+          <button type="submit">Add task</button>
+        </form>
+        <ul id="daily-task-list" class="list"></ul>
+
+        <label>
+          Daily notes
+          <textarea id="daily-note" rows="4" placeholder="Write your reflections, priorities, or wins..."></textarea>
+        </label>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
